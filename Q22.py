@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 
 def create_network_diagram(n, m, qualifications, k):
-    G = nx.Graph()
+    G = nx.DiGraph()  # Use DiGraph instead of Graph to indicate the direction of edges
 
     # Add nodes to the graph representing applicants
     for i in range(m):
@@ -19,9 +19,20 @@ def create_network_diagram(n, m, qualifications, k):
                 break
         if sports_covered:
             for u, v in combinations(comb, 2):
-                G.add_edge(u, v)
+                G.add_edge(u, v)  # Add directed edge from u to v
 
     return G
+
+def hire_counselors(n, m, qualifications, k):
+    for comb in combinations(range(m), k):
+        sports_covered = set(range(n))
+        for applicant in comb:
+            sports_covered &= set(i for i, qualified in enumerate(qualifications[applicant]) if qualified)
+            if not sports_covered:
+                break
+        if sports_covered:
+            return True
+    return False
 
 # Example usage
 n = 3
@@ -38,8 +49,12 @@ k = 3
 # Create the network diagram
 G = create_network_diagram(n, m, qualifications, k)
 
-# Draw the network diagram
+# Draw the network diagram with arrows
 pos = nx.spring_layout(G)
-nx.draw_networkx(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray')
+nx.draw_networkx(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray', arrows=True, arrowstyle='->', arrowsize=10)
 plt.title("Qualifications Network Diagram")
 plt.show()
+
+# Hire counselors
+result = hire_counselors(n, m, qualifications, k)
+print("Hire counselors:", result)
