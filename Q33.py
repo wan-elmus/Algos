@@ -3,7 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def create_network_diagram(n, flights):
-    G = nx.DiGraph()  # Use DiGraph instead of Graph to indicate the direction of flights
+    G = nx.DiGraph()  
 
     # Add nodes to the graph representing airport sites
     for i in range(n):
@@ -56,7 +56,7 @@ flights = [
 # Create the network diagram
 G = create_network_diagram(n, flights)
 
-# Draw the network diagram with arrows
+# Draw the network diagram 
 pos = nx.spring_layout(G)
 nx.draw_networkx(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray', arrows=True, arrowstyle='->', arrowsize=10)
 plt.title("Airport Network Diagram")

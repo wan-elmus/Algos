@@ -11,10 +11,9 @@ def create_network_diagram(n, rewards, conflicts):
 
     # Add edges based on the conflicts
     for i in range(n):
-        for j in range(i):  # Consider only the lower triangular part of the conflicts matrix
+        for j in range(i):  
             if conflicts[i][j]:
-                G.add_edge(j, i)  # Reverse the direction of the edge
-
+                G.add_edge(j, i)  
     return G
 
 def find_maximum_reward(n, rewards, conflicts):

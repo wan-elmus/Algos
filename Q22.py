@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 
 def create_network_diagram(n, m, qualifications, k):
-    G = nx.DiGraph()  # Use DiGraph instead of Graph to indicate the direction of edges
-
+    G = nx.DiGraph()  
     # Add nodes to the graph representing applicants
     for i in range(m):
         G.add_node(i, label=f"Applicant {i}")
@@ -19,7 +18,7 @@ def create_network_diagram(n, m, qualifications, k):
                 break
         if sports_covered:
             for u, v in combinations(comb, 2):
-                G.add_edge(u, v)  # Add directed edge from u to v
+                G.add_edge(u, v)  
 
     return G
 
